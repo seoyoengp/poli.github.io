@@ -149,11 +149,29 @@ function renderBoard() {
   }
 }
 
+function renderAuthNav() {
+  const containers = document.querySelectorAll(".nav-auth");
+  const user = getCurrentUser();
+  containers.forEach(c => {
+    c.innerHTML = user
+      ? `
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="라이트모드">☀️</button>
+        <a class="btn-outline" id="logout-btn" href="javascript:void(0)">로그아웃</a>
+      `
+      : `
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="라이트모드">☀️</button>
+        <a class="btn-outline" href="login.html">로그인</a>
+        <a class="btn" href="register.html">회원가입</a>
+      `;
+  });
+}
+
 function init() {
-  attachAuthHandlers();
-  renderBoard();
+  renderAuthNav();
   applyThemeFromStorage();
   attachThemeToggle();
+  attachAuthHandlers();
+  renderBoard();
 }
 
 init();
